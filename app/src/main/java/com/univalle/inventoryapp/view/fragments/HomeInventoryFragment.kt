@@ -32,17 +32,17 @@ class HomeInventoryFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        controlers()
+        controllers()
         viewModelObservers()
     }
 
-    private fun controlers() {
-        controlerOverSystemBackButton()
+    private fun controllers() {
+        controllerOverSystemBackButton()
         listenerButtonExit()
         listenerButtonAdd()
     }
 
-    private fun controlerOverSystemBackButton() {
+    private fun controllerOverSystemBackButton() {
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
             requireActivity().moveTaskToBack(true)
         }
@@ -50,7 +50,7 @@ class HomeInventoryFragment : Fragment() {
 
     private fun listenerButtonExit() {
         binding.contentToolbar.iconExit.setOnClickListener {
-            findNavController().navigate(R.id.action_homeInventoryFragment_to_authentificationFragment)
+            findNavController().navigate(R.id.action_homeInventoryFragment_to_authenticationFragment)
         }
     }
 

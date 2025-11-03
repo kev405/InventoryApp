@@ -6,12 +6,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/backgroundColor"
-        tools:context=".view.fragments.AuthentificationFragment">
+        tools:context=".view.fragments.AuthenticationFragment">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Authentification Fragment"
+            android:text="Authentication Fragment"
             android:textColor="@color/white"/>
 
     </FrameLayout>
