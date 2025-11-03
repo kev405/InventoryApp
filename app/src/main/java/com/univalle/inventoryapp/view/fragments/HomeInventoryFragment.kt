@@ -36,7 +36,14 @@ class HomeInventoryFragment : Fragment() {
     }
 
     private fun controlers() {
+        listenerButtonExit()
         listenerButtonAdd()
+    }
+
+    private fun listenerButtonExit() {
+        binding.contentToolbar.iconExit.setOnClickListener {
+            findNavController().navigate(R.id.action_homeInventoryFragment_to_authentificationFragment)
+        }
     }
 
     private fun listenerButtonAdd() {
