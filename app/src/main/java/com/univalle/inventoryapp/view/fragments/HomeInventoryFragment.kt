@@ -1,6 +1,7 @@
 package com.univalle.inventoryapp.view.fragments
 
 import android.os.Bundle
+import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -36,8 +37,15 @@ class HomeInventoryFragment : Fragment() {
     }
 
     private fun controlers() {
+        controlerOverSystemBackButton()
         listenerButtonExit()
         listenerButtonAdd()
+    }
+
+    private fun controlerOverSystemBackButton() {
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
+            requireActivity().moveTaskToBack(true)
+        }
     }
 
     private fun listenerButtonExit() {
