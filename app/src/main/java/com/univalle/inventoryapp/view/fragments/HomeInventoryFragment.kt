@@ -6,12 +6,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.univalle.inventoryapp.R
 import com.univalle.inventoryapp.databinding.FragmentHomeInventoryBinding
 import com.univalle.inventoryapp.view.adapters.InventoryAdapter
 import com.univalle.inventoryapp.viewmodel.InventoryViewModel
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class HomeInventoryFragment : Fragment() {
     private lateinit var binding: FragmentHomeInventoryBinding
@@ -53,6 +56,15 @@ class HomeInventoryFragment : Fragment() {
     }
 
     private fun observeProgress() {
+        inventoryViewModel.progressState.observe(viewLifecycleOwner) { status ->
+            if (status) {
+                binding.progressBar.visibility = View.VISIBLE
+                viewLifecycleOwner.lifecycleScope.launch {
+                    delay(1000L)
+                    binding.progressBar.visibility = View.GONE
+                }
+            }
+        }
     }
 
 }

@@ -17,7 +17,7 @@ class InventoryViewModel(application: Application) : AndroidViewModel(applicatio
     val listInventory: LiveData<MutableList<Inventory>> get() = _listInventory
 
     private val _progressState = MutableLiveData(false)
-    val progresState: LiveData<Boolean> = _progressState
+    val progressState: LiveData<Boolean> = _progressState
 
 
     fun getListInventory() {
