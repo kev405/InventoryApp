@@ -48,7 +48,6 @@ class AddItemFragment : Fragment() {
         binding.etPrecio.addTextChangedListener(textWatcher)
         binding.etCantidad.addTextChangedListener(textWatcher)
     }
-
     private fun validarCampos() {
         val codigo = binding.etCodigo.text.toString()
         val nombre = binding.etNombre.text.toString()
