@@ -33,4 +33,33 @@ class InventoryViewModel(application: Application) : AndroidViewModel(applicatio
         }
     }
 
+    fun insertProduct(inventory: Inventory) {
+        viewModelScope.launch {
+            try {
+                inventoryRepository.insertProduct(inventory)
+                getListInventory()
+            } catch (e: Exception) {
+
+            }
+        }
+    }
+
+    fun deleteInventory(inventory: Inventory) {
+        viewModelScope.launch {
+            _progressState.value = true
+            try {
+                inventoryRepository.delete(inventory)
+                _progressState.value = false
+            } catch (e: Exception) {
+                _progressState.value = false
+            }
+
+        }
+    }
+
+    fun totalProducto(price: Int, quantity: Int): Double {
+        val total = price * quantity
+        return total.toDouble()
+    }
+
 }
