@@ -33,4 +33,15 @@ class InventoryViewModel(application: Application) : AndroidViewModel(applicatio
         }
     }
 
+    fun insertProduct(inventory: Inventory) {
+        viewModelScope.launch {
+            try {
+                inventoryRepository.insertProduct(inventory)
+                getListInventory()
+            } catch (e: Exception) {
+
+            }
+        }
+    }
+
 }

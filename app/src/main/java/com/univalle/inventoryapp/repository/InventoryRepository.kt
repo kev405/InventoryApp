@@ -12,10 +12,15 @@ class InventoryRepository (val context: Context){
     private var inventoryDao: InventoryDao = InventoryDB.getDatabase(context).inventoryDao()
 
 
-
     suspend fun getListInventory():MutableList<Inventory>{
         return withContext(Dispatchers.IO){
             inventoryDao.getListInventory()
+        }
+    }
+
+    suspend fun insertProduct(inventory: Inventory){
+        withContext(Dispatchers.IO){
+            inventoryDao.insertProduct(inventory)
         }
     }
 
