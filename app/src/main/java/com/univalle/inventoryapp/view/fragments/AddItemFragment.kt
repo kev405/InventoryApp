@@ -13,10 +13,14 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.graphics.Color
 import android.graphics.Typeface
+import androidx.fragment.app.viewModels // Importar viewModels
+import com.univalle.inventoryapp.model.Inventory // Importar el modelo
+import com.univalle.inventoryapp.viewmodel.InventoryViewModel // Importar el ViewModel
 
 class AddItemFragment : Fragment() {
 
     private lateinit var binding: FragmentAddItemBinding
+    private val inventoryViewModel: InventoryViewModel by viewModels()
 
     private val textWatcher = object : TextWatcher {
         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
@@ -39,6 +43,7 @@ class AddItemFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         binding.toolbarAddItem.setNavigationOnClickListener {
             findNavController().popBackStack()
         }
@@ -47,7 +52,11 @@ class AddItemFragment : Fragment() {
         binding.etNombre.addTextChangedListener(textWatcher)
         binding.etPrecio.addTextChangedListener(textWatcher)
         binding.etCantidad.addTextChangedListener(textWatcher)
+        binding.btnGuardar.setOnClickListener {
+            guardarProducto()
+        }
     }
+
     private fun validarCampos() {
         val codigo = binding.etCodigo.text.toString()
         val nombre = binding.etNombre.text.toString()
@@ -64,6 +73,28 @@ class AddItemFragment : Fragment() {
         } else {
             binding.btnGuardar.setTextColor(Color.LTGRAY)
             binding.btnGuardar.setTypeface(null, Typeface.NORMAL)
+        }
+    }
+
+    private fun guardarProducto() {
+        val codigo = binding.etCodigo.text.toString().toIntOrNull()
+        val nombre = binding.etNombre.text.toString()
+        val precio = binding.etPrecio.text.toString().toIntOrNull()
+        val cantidad = binding.etCantidad.text.toString().toIntOrNull()
+
+        if (codigo != null && nombre.isNotBlank() && precio != null && cantidad != null) {
+            val newProduct = Inventory(
+                id = codigo,
+                name = nombre,
+                price = precio,
+                quantity = cantidad
+            )
+
+            inventoryViewModel.insertProduct(newProduct)
+
+            findNavController().popBackStack()
+        } else {
+            // Se podría añadir un mensaje de error si la conversión falla (aunque los inputs son numéricos)
         }
     }
 }
