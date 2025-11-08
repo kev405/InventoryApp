@@ -57,6 +57,18 @@ class InventoryViewModel(application: Application) : AndroidViewModel(applicatio
         }
     }
 
+    fun updateInventory(inventory: Inventory) {
+        viewModelScope.launch {
+            _progressState.value = true
+            try {
+                inventoryRepository.update(inventory)
+                _progressState.value = false
+            } catch (e: Exception) {
+                _progressState.value = false
+            }
+        }
+    }
+
     fun totalProducto(price: Int, quantity: Int): Double {
         val total = price * quantity
         return total.toDouble()

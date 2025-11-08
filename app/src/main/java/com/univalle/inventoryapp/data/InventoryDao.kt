@@ -21,9 +21,6 @@ interface InventoryDao {
     @Update
     suspend fun update(inventory: Inventory): Int
 
-    @Query("SELECT * FROM Inventory WHERE id = :id")
-    fun getProductById(id: Int): Flow<Inventory>
-
     @Delete
     suspend fun delete(inventory: Inventory): Int
 
