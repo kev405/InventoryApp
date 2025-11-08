@@ -14,6 +14,11 @@
     <string name="product_deleted">Producto eliminado</string>
     <string name="confirm_delete_title">Confirmar eliminación</string>
     <string name="confirm_delete_message">¿Estás seguro de que deseas eliminar este producto?</string>
+    <string name="edit_product">Editar producto</string>
+    <string name="name_item">Nombre artículo</string>
+    <string name="price_item">Precio</string>
+    <string name="quantity_item">Cantidad</string>
+    <string name="edit">Editar</string>
     <string name="no">No</string>
     <string name="yes">Si</string>
 </resources>

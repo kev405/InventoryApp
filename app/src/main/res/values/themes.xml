@@ -12,4 +12,12 @@
 
         <item name="boxStrokeWidth">2dp</item>
     </style>
+
+    <style name="App.TextInputLayout" parent="Widget.Material3.TextInputLayout.OutlinedBox">
+        <item name="hintTextColor">@android:color/white</item>
+
+        <item name="android:textColorHint">@android:color/darker_gray</item>
+
+        <item name="boxStrokeColor">@color/text_input_layout_stroke_colors</item>
+    </style>
 </resources>
