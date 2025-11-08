@@ -14,6 +14,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.univalle.inventoryapp.R
 import com.univalle.inventoryapp.databinding.FragmentAuthenticationBinding
+import com.univalle.inventoryapp.utils.Prefs
 import com.univalle.inventoryapp.viewmodel.LoginViewModel
 import java.util.concurrent.Executor
 
@@ -70,6 +71,7 @@ class AuthenticationFragment : Fragment() {
                 override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {
                     super.onAuthenticationSucceeded(result)
 
+                    Prefs.setLoggedIn(requireContext(), true)
                     navigateToHome()
                 }
 
