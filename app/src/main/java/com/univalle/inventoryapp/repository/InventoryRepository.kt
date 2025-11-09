@@ -28,4 +28,10 @@ class InventoryRepository (val context: Context){
         }
     }
 
+    suspend fun update(inventory: Inventory){
+        withContext(Dispatchers.IO){
+            inventoryDao.update(inventory)
+        }
+    }
+
 }
