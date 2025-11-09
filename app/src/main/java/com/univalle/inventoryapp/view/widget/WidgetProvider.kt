@@ -67,14 +67,15 @@ class WidgetProvider: AppWidgetProvider() {
 //                action = ACTION_LOGIN
 //                putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId)
 //            }
-//
-//            val pendingIntentApp = PendingIntent.getBroadcast(
-//                context,
-//                appWidgetId,
-//                intentApp,
-//                PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
-//            )
-//            views.setOnClickPendingIntent(R.id.settings_icon, pendingIntentApp)
+            val intentApp = Intent(context, MainActivity::class.java)
+
+            val pendingIntentApp = PendingIntent.getActivity(
+                context,
+                appWidgetId,
+                intentApp,
+                PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+            )
+            views.setOnClickPendingIntent(R.id.settings_icon, pendingIntentApp)
 
             /////////////////////////// Update widget of all
             appWidgetManager.updateAppWidget(appWidgetId, views)
@@ -115,6 +116,11 @@ class WidgetProvider: AppWidgetProvider() {
                 views.setImageViewResource(R.id.eye_icon, R.drawable.ic_opened_eye)
             }
 //            appWidgetManager.updateAppWidget(appWidgetId, views)
+        }
+        else if (intent.action == ACTION_LOGIN) {
+            val launchIntent = Intent(context, MainActivity::class.java)
+            launchIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+            context.startActivity(launchIntent)
         }
 
         appWidgetManager.updateAppWidget(appWidgetId, views)
