@@ -16,7 +16,6 @@ import android.graphics.Color
 
 class WidgetProvider: AppWidgetProvider() {
 
-    private var isVisible = false
     private var inventoryValue="showing"
 
     companion object {
@@ -25,6 +24,7 @@ class WidgetProvider: AppWidgetProvider() {
         const val PREFS_NAME = "WidgetPrefs"
         const val PREF_PREFIX_KEY = "visible_value"
         const val ACTION_CHANGE_TEXT = "com.example.mywidget.CHANGE_TEXT"
+        const val ACTION_LOGIN = "com.univalle.inventoryapp.widget.LOGIN"
     }
 
     override fun onUpdate(context: Context, appWidgetManager: AppWidgetManager, appWidgetIds: IntArray) {
@@ -48,7 +48,6 @@ class WidgetProvider: AppWidgetProvider() {
 
             ///////////////////////////UNCOVERE
             ///////////////////////////UNCOVERED
-            val isVisible = loadVisibility(context, appWidgetId)
             val intentToggle = Intent(context, WidgetProvider::class.java).apply {
                 action = ACTION_TOGGLE_TEXT
                 putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId)
@@ -61,6 +60,21 @@ class WidgetProvider: AppWidgetProvider() {
                 PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
             )
             views.setOnClickPendingIntent(R.id.eye_icon, pendingIntentToggle)
+
+            ///////////////////////////
+            ///////////////////////////GO TO APP
+//            val intentApp = Intent(context, MainActivity::class.java).apply {
+//                action = ACTION_LOGIN
+//                putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId)
+//            }
+//
+//            val pendingIntentApp = PendingIntent.getBroadcast(
+//                context,
+//                appWidgetId,
+//                intentApp,
+//                PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+//            )
+//            views.setOnClickPendingIntent(R.id.settings_icon, pendingIntentApp)
 
             /////////////////////////// Update widget of all
             appWidgetManager.updateAppWidget(appWidgetId, views)
@@ -85,8 +99,8 @@ class WidgetProvider: AppWidgetProvider() {
 
 //            appWidgetManager.updateAppWidget(appWidgetId, views)
         }
-        if (intent.action == ACTION_TOGGLE_TEXT) {
-            val appWidgetId = intent.getIntExtra(EXTRA_WIDGET_ID, AppWidgetManager.INVALID_APPWIDGET_ID)
+        else if (intent.action == ACTION_TOGGLE_TEXT) {
+//            val appWidgetId = intent.getIntExtra(EXTRA_WIDGET_ID, AppWidgetManager.INVALID_APPWIDGET_ID)
 
             val current = loadVisibility(context, appWidgetId)
             val newState = !current
@@ -94,14 +108,15 @@ class WidgetProvider: AppWidgetProvider() {
 
             if(current){
                 views.setTextViewText(R.id.widget_value, "$****")
-//                views.setImageViewResource(R.id.eye_icon, R.drawable.ic_closed_eye)
+                views.setImageViewResource(R.id.eye_icon, R.drawable.ic_closed_eye)
             }
             else{
                 views.setTextViewText(R.id.widget_value, inventoryValue)
-//                views.setImageViewResource(R.id.eye_icon, R.drawable.ic_opened_eye)
+                views.setImageViewResource(R.id.eye_icon, R.drawable.ic_opened_eye)
             }
 //            appWidgetManager.updateAppWidget(appWidgetId, views)
         }
+
         appWidgetManager.updateAppWidget(appWidgetId, views)
     }
     private fun saveVisibility(context: Context, appWidgetId: Int, visible: Boolean) {
