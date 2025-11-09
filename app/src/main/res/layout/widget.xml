@@ -37,7 +37,7 @@
         android:layout_width="180dp"
         android:layout_height="30dp"
         android:layout_marginLeft="3dp"
-        android:text="cuanto tengo de inventario?"
+        android:text="¿Cuánto tengo de inventario?"
         android:textColor="@color/widget_title2"
 
         android:textSize="14sp"
