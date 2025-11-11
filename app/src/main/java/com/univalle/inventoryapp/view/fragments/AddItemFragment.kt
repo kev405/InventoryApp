@@ -96,8 +96,6 @@ class AddItemFragment : Fragment() {
             )
 
             inventoryViewModel.insertProduct(newProduct)
-
-            WidgetUpdate.saveValueForWidget(requireContext(),"fragment")
             viewLifecycleOwner.lifecycleScope.launch {
                 val totalValue = inventoryViewModel.getTotalInventoryValue()
                 val value = PriceFormatter.formatPrice(totalValue)
