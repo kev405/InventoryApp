@@ -8,6 +8,8 @@ import androidx.lifecycle.viewModelScope
 import com.univalle.inventoryapp.model.Inventory
 import com.univalle.inventoryapp.repository.InventoryRepository
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 class InventoryViewModel(application: Application) : AndroidViewModel(application) {
     val context = getApplication<Application>()
@@ -74,15 +76,9 @@ class InventoryViewModel(application: Application) : AndroidViewModel(applicatio
         return total
     }
 
-    fun getTotalInventoryValue() {
-        viewModelScope.launch {
-            _progressState.value = true
-            try {
-                val totalValue = inventoryRepository.getTotalInventoryValue()
-                _progressState.value = false
-            } catch (e: Exception) {
-                _progressState.value = false
-            }
+    suspend fun getTotalInventoryValue(): Double {
+        return withContext(Dispatchers.IO) {
+            inventoryRepository.getTotalInventoryValue()
         }
     }
 
